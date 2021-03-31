@@ -1,22 +1,21 @@
-package dao;
+package daoImpl;
 
+import daoTasks.Dao;
 import entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import util.HibernateSessionFactoryUtil;
+import util.HibernateSessionAnnotationFactoryUtil;
 
-import java.sql.SQLException;
 import java.util.List;
 
-public class UserDao implements Dao<User>{
-    private SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
+public class UserDao implements Dao<User> {
+    SessionFactory sessionFactory = HibernateSessionAnnotationFactoryUtil.getSessionFactory();
 
     @Override
     public void create(User model) {
         if(model.getAge() >= 18 && model.getEmail().contains("@")) {
             try (Session session = sessionFactory.openSession()) {
-                //Чтобы созранить объект в бд - нужно начать транзакцию
                 session.beginTransaction();
                 session.save(model);
                 session.getTransaction().commit();
@@ -29,7 +28,6 @@ public class UserDao implements Dao<User>{
     @Override
     public void update(User model, int id_model) {
         try (Session session = sessionFactory.openSession()) {
-            //Чтобы созранить объект в бд - нужно начать транзакцию
             session.beginTransaction();
             Query query = session.createQuery("UPDATE User " +
                     "SET " +
@@ -66,7 +64,6 @@ public class UserDao implements Dao<User>{
     @Override
     public List<User> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            //Чтобы созранить объект в бд - нужно начать транзакцию
             session.beginTransaction();
             Query query = session.createQuery("FROM User");
             List list = query.list();
@@ -87,14 +84,13 @@ public class UserDao implements Dao<User>{
         }
     }
 
-    public int selectIdUser(User user) {
+    public User getUserWithId(User module) {
         try (Session session = sessionFactory.openSession()) {
-            //Чтобы созранить объект в бд - нужно начать транзакцию
             session.beginTransaction();
-            Query query = session.createQuery("SELECT id_user FROM User WHERE login =: login");
-            query.setParameter("login", user.getLogin());
+            Query query = session.createQuery("FROM User WHERE login =: login");
+            query.setParameter("login", module.getLogin());
             List list = query.list();
-            return (int) list.get(0);
+            return (User) list.get(0);
         }
     }
 }

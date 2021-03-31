@@ -1,4 +1,4 @@
-package JDBC;
+package createTablesWithJDBC;
 
 import java.io.Closeable;
 import java.sql.Connection;
@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static JDBC.ConnectionConstant.URL;
-import static JDBC.ConnectionConstant.USER;
-import static JDBC.ConnectionConstant.PASSWORD;
+import static createTablesWithJDBC.ConnectionConstant.URL;
+import static createTablesWithJDBC.ConnectionConstant.USER;
+import static createTablesWithJDBC.ConnectionConstant.PASSWORD;
 
 public class DatabaseConnector implements Closeable {
     private final Connection connection;

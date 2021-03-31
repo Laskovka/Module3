@@ -1,4 +1,4 @@
-package JDBC;
+package createTablesWithJDBC;
 
 public class TableCreator {
     private static final String CREATE_POST = "" +
@@ -36,7 +36,7 @@ public class TableCreator {
             "    is_moderator BOOLEAN NOT NULL\n" +
             ");";
 
-    public void createTableStudents(DatabaseConnector databaseConnector) {
+    public void createTables(createTablesWithJDBC.DatabaseConnector databaseConnector) {
         databaseConnector.executeUpdate(CREATE_USER);
         databaseConnector.executeUpdate(CREATE_POST);
         databaseConnector.executeUpdate(CREATE_SAF);

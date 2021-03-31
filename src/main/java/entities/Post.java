@@ -1,12 +1,33 @@
 package entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "post")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_post;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "content")
     private String content;
+
+    @ManyToOne()
+    @JoinColumns(@JoinColumn(name = "author_id", referencedColumnName = "id_user"))
     private User author_id;
+
+    @ManyToOne()
+    @JoinColumns(@JoinColumn(name = "moderator_id", referencedColumnName = "id_user"))
     private User moderator_id;
+
+    @Column(name = "rating")
     private int rating;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private PostStatus status;
 
     public Post(String title, String content, User author_id, User moderator_id, int rating, PostStatus status) {
@@ -75,5 +96,18 @@ public class Post {
 
     public void setStatus(PostStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id_post=" + id_post +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", author_id=" + author_id +
+                ", moderator_id=" + moderator_id +
+                ", rating=" + rating +
+                ", status=" + status +
+                '}';
     }
 }

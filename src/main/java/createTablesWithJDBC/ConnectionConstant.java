@@ -1,4 +1,4 @@
-package JDBC;
+package createTablesWithJDBC;
 
 public class ConnectionConstant {
     public static final String URL = "jdbc:mysql://localhost:3306/module3";

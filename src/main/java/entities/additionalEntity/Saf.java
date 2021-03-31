@@ -1,8 +1,24 @@
-package entities;
+package entities.additionalEntity;
 
+import entities.User;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "saf")
 public class Saf {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_saf;
+
+//    @Column(name = "id_user")
+    @OneToOne()
+    @JoinColumns(@JoinColumn(name = "id_user", referencedColumnName = "id_user"))
     private User id_user;
+
+//    @Column(name = "id_subscriber")
+    @OneToOne
+    @JoinColumns(@JoinColumn(name = "id_subscriber", referencedColumnName = "id_user"))
     private User id_subscriber;
 
     public Saf(User id_user, User id_subscriber) {

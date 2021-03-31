@@ -1,12 +1,30 @@
 package entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_user;
+
+    @Column(name = "full_name")
     private String full_name;
+
+    @Column(name = "login")
     private String login;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "age")
     private int age;
+
+    @Column(name = "is_author")
     private boolean is_author;
+
+    @Column(name = "is_moderator")
     private boolean is_moderator;
 
     public User(String full_name, String login, String email, int age, boolean is_author, boolean is_moderator) {

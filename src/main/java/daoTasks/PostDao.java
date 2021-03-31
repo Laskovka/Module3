@@ -1,4 +1,4 @@
-package dao;
+package daoTasks;
 
 import entities.Post;
 import entities.User;
